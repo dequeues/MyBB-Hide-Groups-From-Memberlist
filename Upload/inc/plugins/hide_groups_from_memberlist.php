@@ -75,7 +75,7 @@ function hide_groups_from_memberlist_activate()
 				while($user = $db->fetch_array($query))
 				{
 					$user = $plugins->run_hooks("memberlist_user", $user);
-					if (in_array($user[\'uid\'], $hide_groups))
+					if (in_array($user[\'usergroup\'], $hide_groups))
 					{
 						continue;
 					}
