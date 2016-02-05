@@ -14,7 +14,7 @@ function hide_groups_from_memberlist_info()
 		'website' => 'http://github.com/dequeues',
 		'author' => 'Nathan',
 		'authorsite' => 'http://github.com/dequeues',
-		'version' => '1.0',
+		'version' => '1.1',
 		'compatibility' => '18'
 	);
 }
@@ -80,6 +80,20 @@ function hide_groups_from_memberlist_activate()
 						continue;
 					}
 					$alt_bg = alt_trow();'
+		),
+		true
+	);
+
+	$search = array('$group = array();');
+	$PL->edit_core('hide_groups_from_memberlist', 'memberlist.php',
+		array(
+			'search' => $search,
+			'replace' => '$group = array();
+			$hidegroups = explode(\',\', $mybb->settings[\'hidegroupsfrommemberlist_groupstohide\']);
+			foreach($hidegroups as $hgid)
+			{
+				$group[] = (int)$hgid;
+			}'
 		),
 		true
 	);
